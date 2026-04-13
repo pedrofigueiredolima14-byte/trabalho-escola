@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> ArquiteturadeInterior </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-color: #8a6d3b;
+            --secondary-color: #f5f5f5;
+            --accent-color: #d7ccc8;
+            --dark-color: #3e3e3e;
+            --light-color: #ffffff;
+            --text-color: #333333;
+        }
+
+        body {
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: var(--secondary-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--light-color);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .logo span {
+            font-weight: 300;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1616594039964-ae9021a400a0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: var(--light-color);
+            margin-top: 70px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: var(--light-color);
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #755729;
+        }
+
+        /* Services */
+        .services {
+            padding: 100px 0;
+            background-color: var(--light-color);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: var(--dark-color);
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            color: #777;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background-color: var(--secondary-color);
+            padding: 40px 30px;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--dark-color);
+        }
+
+        /* Projects */
+        .projects {
+            padding: 100px 0;
+            background-color: var(--secondary-color);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .project-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .project-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+
+        .project-card:hover .project-info {
+            transform: translateY(0);
+        }
+
+        .project-info h3 {
+            margin-bottom: 10px;
+            color: var(--dark-color);
+        }
+
+        /* About */
+        .about {
+            padding: 100px 0;
+            background-color: var(--light-color);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 20px;
+            color: var(--dark-color);
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Contact */
+        .contact {
+            padding: 100px 0;
+            background-color: var(--secondary-color);
+        }
+
+        .contact-form {
+            max-width: 700px;
+            margin: 0 auto;
+            background-color: var(--light-color);
+            padding: 50px;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: var(--light-color);
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .footer-column p {
+            color: #aaa;
+            margin-bottom: 15px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: #555;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            transition: background-color 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary-color);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #444;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                padding: 15px 0;
+            }
+            
+            .logo {
+                margin-bottom: 15px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 0 10px;
+            }
+            
+            .hero {
+                margin-top: 120px;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .contact-form {
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo">Arquitetura<span> De Interiores</span></a>
+            <nav>
+                <ul>
+                    <li><a href="#home">Início</a></li>
+                    <li><a href="#projects">Projetos</a></li>
+                    <li><a href="#about">Sobre</a></li>
+                
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container hero-content">
+            <h1>Criamos ambientes que inspiram e transformam seu pequeno mundinho em algo maior</h1>
+            <p>Design de interiores personalizado que reflete sua personalidade e atende suas necessidades funcionais</p>
+            <a href= "https://www.youtube.com/watch?v=h7basWWd9PI&t=1441s" class="btn">Solicite um Orçamento </a> 
+            
+        </div>
+    </section>
+
+   
+
+    <!-- Projects Section -->
+    <section class="projects" id="projects">
+        <div class="container">
+            <div class="section-title">
+                <h2>Projetos Recentes</h2>
+                <p>Conheça alguns dos nossos trabalhos que transformaram espaços com criatividade e funcionalidade</p>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1615529328331-f8917597711f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Sala de estar moderna">
+                    <div class="project-info">
+                        <h3>Sala de Estar Contemporânea</h3>
+                        <p>Design que combina conforto e elegância com uma paleta de cores neutras e texturas aconchegantes.</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Cozinha integrada">
+                    <div class="project-info">
+                        <h3>Cozinha Integrada</h3>
+                        <p>Espaço funcional com ilha central, iluminação estratégica e acabamentos em madeira e mármore.</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?ixlib=rb-4.0.3&auto=format&fit=crop&w-800&q=80" alt="Escritório minimalista">
+                    <div class="project-info">
+                        <h3>Escritório Minimalista</h3>
+                        <p>Ambiente de trabalho clean que promove produtividade com mobiliário ergonômico e organização inteligente.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>Sobre Nossa Filosofia</h2>
+                    <p>Acreditamos que o design de interiores vai além da estética. É sobre criar espaços que melhoram a qualidade de vida, promovem bem-estar e refletem a personalidade de quem os habita.</p>
+                    <p>Com mais de 10 anos de experiência, nossa equipe combina criatividade, conhecimento técnico e atenção aos detalhes para transformar visões em realidades funcionais e belas.</p>
+                    <p>Trabalhamos em estreita colaboração com nossos clientes, entendendo suas necessidades, preferências e estilo de vida para criar soluções personalizadas que superem expectativas.</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Design de interiores">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>ArquiteturaDeInterior</h3>
+                    <p>Transformando espaços com design criativo e funcional há mais de uma década.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Contato</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Mato Grosso, 321 - Centro - Curitiba</p>
+                    <p><i class="fas fa-phone"></i> (41) 8805-6987 </p>
+                    <p><i class="fas fa-envelope"></i> contato:geanefig@gmail.com</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Horário de Atendimento</h3>
+                    <p>Segunda a Sexta: 9h às 21h</p>
+                    <p>Sábado: 10h às 16h</p>
+                    <p>Domingo: Fechado</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 Arquitetura de Interior. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop - 100,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+           
+          
+            
+            // Reset form
+            this.reset();
+        });
+    </script>
+</body>
+</html>
